@@ -7,6 +7,11 @@ var InputItem = require('./InputItem.jsx');
 
 var Calculator = React.createClass({
   onAdd: function(){
+    console.log("Initial onAdd "+this);
+    var a =  +this.refs.firstNumber.state.value;
+    var b =  +this.refs.secondNumber.state.value;
+    console.log(a+' and '+b);
+    this.refs.answer.setState({value:a+b}) ;
 
   },
   render: function(){
@@ -20,10 +25,10 @@ var Calculator = React.createClass({
 
             <div style={inputStyle} className="row">
               <div className="col-xs-6 col-sm-6 col-md-6">
-                <InputItem placeholder="NUMBER e.g. 2108" rel="firstNumber"/>
+                <InputItem placeholder="NUMBER e.g. 2108" ref="firstNumber"/>
               </div>
               <div className="col-xs-6 col-sm-6 col-md-6">
-                <InputItem placeholder="NUMBER e.g. 2108" rel="secondNumber"/>
+                <InputItem placeholder="NUMBER e.g. 2108" ref="secondNumber"/>
               </div>
             </div>
             <div style={inputStyle}  className="row">
@@ -42,7 +47,7 @@ var Calculator = React.createClass({
             </div>
             <div  className = "row">
               <div className="col-md-9">
-                <InputItem placeholder="Result" />
+                <InputItem placeholder="Result" ref="answer"/>
               </div>
               <div className="col-md-3">
                 <ButtonItem nameButton="Clear"/>

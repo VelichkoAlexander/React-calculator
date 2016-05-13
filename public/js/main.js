@@ -19495,12 +19495,14 @@ var React = require('react');
 var ButtonItem = React.createClass({
   displayName: "ButtonItem",
 
-
+  clear: function () {
+    this.setState({ value: "" });
+  },
   render: function () {
     var styleButton = this.props.nameButton == "Clear" ? "btn btn-raised btn-danger btn-block" : "btn btn-raised btn-primary btn-block";
     return React.createElement(
       "button",
-      { className: styleButton },
+      { className: styleButton, onClick: this.props.onClick },
       this.props.nameButton
     );
   }
@@ -19518,7 +19520,13 @@ var InputItem = require('./InputItem.jsx');
 var Calculator = React.createClass({
   displayName: 'Calculator',
 
-  onAdd: function () {},
+  onAdd: function () {
+    console.log("Initial onAdd " + this);
+    var a = +this.refs.firstNumber.state.value;
+    var b = +this.refs.secondNumber.state.value;
+    console.log(a + ' and ' + b);
+    this.refs.answer.setState({ value: a + b });
+  },
   render: function () {
     var pnaelStyle = { marginTop: 35 };
     var inputStyle = { marginBottom: 20 };
@@ -19540,12 +19548,12 @@ var Calculator = React.createClass({
           React.createElement(
             'div',
             { className: 'col-xs-6 col-sm-6 col-md-6' },
-            React.createElement(InputItem, { placeholder: 'NUMBER e.g. 2108', rel: 'firstNumber' })
+            React.createElement(InputItem, { placeholder: 'NUMBER e.g. 2108', ref: 'firstNumber' })
           ),
           React.createElement(
             'div',
             { className: 'col-xs-6 col-sm-6 col-md-6' },
-            React.createElement(InputItem, { placeholder: 'NUMBER e.g. 2108', rel: 'secondNumber' })
+            React.createElement(InputItem, { placeholder: 'NUMBER e.g. 2108', ref: 'secondNumber' })
           )
         ),
         React.createElement(
@@ -19578,7 +19586,7 @@ var Calculator = React.createClass({
           React.createElement(
             'div',
             { className: 'col-md-9' },
-            React.createElement(InputItem, { placeholder: 'Result' })
+            React.createElement(InputItem, { placeholder: 'Result', ref: 'answer' })
           ),
           React.createElement(
             'div',
