@@ -1,13 +1,33 @@
 var React = require('react');
 
-var InputItem = createClass({
+var InputItem = React.createClass({
 
+  getInitialState: function(){
+    return {valid:true, value:''}
+  },
+  onChange: function(e){
+    var val = e.target.value;
+          if(!isNumber(val)){
+            this.setState({valid: false, value: ''});
+          }else{
+              this.setState({valid: true, value: val});
+          }
+  },
   render: function(){
-    return ();
+    var formClass = this.state.valid ? "form-group": "form-group has-error";
+    var readMode = this.props.placeholder == "Result" ?  true : false;
+
+    return (
+      <div className={formClass}>
+        <input className="form-control" type="number" placeholder={this.props.placeholder} onChange={this.onChange} value={this.state.value}   readOnly={readMode}/>
+      </div>
+    );
   }
 
 });
 
+function isNumber (n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+};
 
-
-modul.exports =  InputItem;
+module.exports =  InputItem;
