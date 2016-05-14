@@ -54,7 +54,7 @@ var Calculator = React.createClass({
 
             <div style={inputStyle} className="row">
               <div className="col-xs-6 col-sm-6 col-md-6">
-                <InputItem placeholder="NUMBER e.g. 2108" ref="firstNumber"/>
+                <InputItem placeholder="NUMBER e.g. 1337" ref="firstNumber"/>
               </div>
               <div className="col-xs-6 col-sm-6 col-md-6">
                 <InputItem placeholder="NUMBER e.g. 2108" ref="secondNumber"/>
