@@ -1,4 +1,4 @@
-#Simple Calculator on react
+#Simple Calculator in react
 ###Task:
 
 You are going to build a simple calculator with react that can Add, Subtract, Multiply, and Divide:
