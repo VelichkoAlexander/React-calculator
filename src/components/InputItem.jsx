@@ -19,7 +19,7 @@ var InputItem = React.createClass({
 
     return (
       <div className={formClass}>
-        <input className="form-control" type="number" placeholder={this.props.placeholder} onChange={this.onChange} value={this.state.value}   readOnly={readMode}/>
+        <input className="form-control text-center" type="number" placeholder={this.props.placeholder} onChange={this.onChange} value={this.state.value}   readOnly={readMode}/>
       </div>
     );
   }

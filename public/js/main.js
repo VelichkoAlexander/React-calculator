@@ -19520,12 +19520,42 @@ var InputItem = require('./InputItem.jsx');
 var Calculator = React.createClass({
   displayName: 'Calculator',
 
-  onAdd: function () {
-    console.log("Initial onAdd " + this);
+  get: function () {
     var a = +this.refs.firstNumber.state.value;
     var b = +this.refs.secondNumber.state.value;
-    console.log(a + ' and ' + b);
-    this.refs.answer.setState({ value: a + b });
+    return { a: a, b: b };
+  },
+  set: function (obj) {
+    this.refs.answer.setState(obj);
+  },
+  onAdd: function () {
+    var a = this.get().a;
+    var b = this.get().b;
+    this.set({ value: a + b });
+  },
+  onSubtract: function () {
+    var a = this.get().a;
+    var b = this.get().b;
+    this.set({ value: a - b });
+  },
+  onDivide: function () {
+    var a = this.get().a;
+    var b = this.get().b;
+    if (b > 0) {
+      this.set({ value: a / b });
+    } else {
+      alert('Division by zero is undefined');
+    }
+  },
+  onMultiply: function () {
+    var a = this.get().a;
+    var b = this.get().b;
+    this.set({ value: a * b });
+  },
+  onClear: function () {
+    this.refs.firstNumber.setState({ value: '' });
+    this.refs.secondNumber.setState({ value: '' });
+    this.refs.answer.setState({ value: '' });
   },
   render: function () {
     var pnaelStyle = { marginTop: 35 };
@@ -19567,17 +19597,17 @@ var Calculator = React.createClass({
           React.createElement(
             'div',
             { className: 'col-sm-6 col-md-3' },
-            React.createElement(ButtonItem, { nameButton: '- Subtract' })
+            React.createElement(ButtonItem, { nameButton: '- Subtract', onClick: this.onSubtract })
           ),
           React.createElement(
             'div',
             { className: 'col-sm-6 col-md-3' },
-            React.createElement(ButtonItem, { nameButton: '/ Divide' })
+            React.createElement(ButtonItem, { nameButton: '/ Divide', onClick: this.onDivide })
           ),
           React.createElement(
             'div',
             { className: 'col-sm-6 col-md-3' },
-            React.createElement(ButtonItem, { nameButton: '* Multiply' })
+            React.createElement(ButtonItem, { nameButton: '* Multiply', onClick: this.onMultiply })
           )
         ),
         React.createElement(
@@ -19591,7 +19621,7 @@ var Calculator = React.createClass({
           React.createElement(
             'div',
             { className: 'col-md-3' },
-            React.createElement(ButtonItem, { nameButton: 'Clear' })
+            React.createElement(ButtonItem, { nameButton: 'Clear', onClick: this.onClear })
           )
         )
       )
@@ -19627,7 +19657,7 @@ var InputItem = React.createClass({
     return React.createElement(
       'div',
       { className: formClass },
-      React.createElement('input', { className: 'form-control', type: 'number', placeholder: this.props.placeholder, onChange: this.onChange, value: this.state.value, readOnly: readMode })
+      React.createElement('input', { className: 'form-control text-center', type: 'number', placeholder: this.props.placeholder, onChange: this.onChange, value: this.state.value, readOnly: readMode })
     );
   }
 
