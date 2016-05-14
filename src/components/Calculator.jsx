@@ -30,7 +30,7 @@ var Calculator = React.createClass({
     if(b>0){
       this.set({value: a/b}) ;
     }else{
-      alert('Division by zero is undefined');
+      alert('Division by zero is undefined');//TODO: Use popup;
     }
   },
   onMultiply: function(){
@@ -44,8 +44,8 @@ var Calculator = React.createClass({
     this.refs.answer.setState({value:''});
   },
   render: function(){
-    var pnaelStyle = {marginTop:35}
-    var inputStyle = {marginBottom: 20}
+    var pnaelStyle = {marginTop:35};
+    var inputStyle = {marginBottom: 20};
 
     return (
       <div style={pnaelStyle} className="panel panel-default">
